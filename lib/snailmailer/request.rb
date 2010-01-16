@@ -1,29 +1,31 @@
-module Twitter
+require 'pp'
+
+module SnailMailer
   class Request
     extend Forwardable
 
-    def self.get(api_key, path, options={})
-      new(api_key, :get, path, options).perform
+    def self.get(client, path, options={})
+      new(client, :get, path, options).perform
     end
 
-    def self.post(api_key, path, options={})
-      new(api_key, :post, path, options).perform
+    def self.post(client, path, options={})
+      new(client, :post, path, options).perform
     end
 
-    def self.put(api_key, path, options={})
-      new(api_key, :put, path, options).perform
+    def self.put(client, path, options={})
+      new(client, :put, path, options).perform
     end
 
-    def self.delete(api_key, path, options={})
-      new(api_key, :delete, path, options).perform
+    def self.delete(client, path, options={})
+      new(client, :delete, path, options).perform
     end
 
-    attr_reader :api_key, :method, :path, :options
+    attr_reader :client, :method, :path, :options
 
-    def_delegators :api_key, :get, :post, :put, :delete
+    def_delegators :client, :get, :post, :put, :delete
 
-    def initialize(api_key, method, path, options={})
-      @api_key, @method, @path, @options = api_key, method, path, {:mash => true}.merge(options)
+    def initialize(client, method, path, options={})
+      @client, @method, @path, @options = client, method, path, {:mash => true}.merge(options)
     end
 
     def uri
@@ -82,7 +84,7 @@ module Twitter
             data = parse(response)
             raise General.new(data), "(#{response.code}): #{response.message} - #{data['error'] if data}"
           when 500
-            raise InformSnailPad, "Twitter had an internal error. Please let them know in the group. (#{response.code}): #{response.message}"
+            raise InformSnailPad, "SnailPad had an internal error. Please let them know in the group. (#{response.code}): #{response.message}"
           when 502..503
             raise Unavailable, "(#{response.code}): #{response.message}"
         end

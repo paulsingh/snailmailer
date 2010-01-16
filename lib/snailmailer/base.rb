@@ -1,33 +1,33 @@
-module Twitter
+module SnailMailer
   class Base
     extend Forwardable
 
     def_delegators :client, :get, :post, :put, :delete
 
-    attr_reader :api_key
+    attr_reader :client
 
-    def initialize(api_key)
-      @api_key = api_key
+    def initialize(client)
+      @client = client
     end
 
-    def show_all_letters(api_key)
-      perform_get("letters.json?api_key=#{@api_key}")
+    def show_all_letters
+      perform_get("/letters.json")
     end
     
     def create_letter(letter)
-      perform_post("/letters.json", :body => {:api_key => @api_key, :letter => letter})
+      perform_post("/letters.json", :body => {:letter => letter})
     end
     
     def show_letter(id)
-      perform_get("/letters/#{id}.json?api_key=#{@api_key}")
+      perform_get("/letters/#{id}.json")
     end
     
     def update_letter(id, letter)
-      perform_put("/letters/#{id}.json", :body => {:api_key => @api_key, :letter => letter})
+      perform_put("/letters/#{id}.json", :body => {:letter => letter})
     end
     
     def purchase_letter(id)
-      perform_get("/letters/#{id}/purchase.json?api_key=#{@api_key}")
+      perform_get("/letters/#{id}/purchase.json")
     end
 
     private

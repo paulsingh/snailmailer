@@ -33,5 +33,6 @@ end
 
 directory = File.expand_path(File.dirname(__FILE__))
 
+require File.join(directory, 'snailmailer', 'apiauth')
 require File.join(directory, 'snailmailer', 'request')
 require File.join(directory, 'snailmailer', 'base')
