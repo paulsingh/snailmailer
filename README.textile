@@ -1,0 +1,100 @@
+Snailmailer
+===========
+
+Introduction goes here.
+
+Example
+=======
+
+>> apiauth = SnailMailer::APIAuth.new("1b9884c66a")
+=> #<SnailMailer::APIAuth:0x1030c8bf0 @options={:api_endpoint=>"localhost:3000"}>
+
+>> base = SnailMailer::Base.new(apiauth)
+=> #<SnailMailer::Base:0x1030c3cb8 @client=#<SnailMailer::APIAuth:0x1030c8bf0 @options={:api_endpoint=>"localhost:3000"}>>
+
+>> base.show_all_letters
+=> ALL THE GOOD STUFF!
+
+
+h1. SnailMailer
+
+SnailMailer is a Ruby on Rails plugin that provides a wrapper for interacting with the "SnailPad":http://www.snailpad.com/api snail mail service API.
+
+h2. Installation
+
+<pre><code>script/plugin install git@github.com:paulsingh/snailmailer.git</code></pre>
+
+h2. Requirements
+
+You will need a "SnailPad":http://www.snailpad.com account. Once you have your SnailPad account set up, you will need to "obtain your API key":http://www.snailpad.com/account/ in order to get started using SnailMailer.
+
+h2. Usage
+
+SnailMailer is intended to be a complete Ruby wrapper for working with the SnailPad API. All methods available from the SnailPad API are available. 
+
+You will need to pass your SnailPad API key to get started:
+
+<pre><code>apiauth = SnailMailer::APIAuth.new("YOUR_API_KEY")</code></pre>
+<pre><code>base = SnailMailer::Base.new(apiauth)</code></pre>
+
+Once you have created a SnailMailer object, you can begin interacting with the SnailPad account that your API key is associated with.
+
+h3. Working with Letters
+
+We have provided some methods to make working with your mailing lists easier.
+
+To see all letters associated with your account:
+<pre><code>base.show_all_letters</code></pre>
+
+To create a new letter:
+<pre><code>data = Hash.new
+data[:letter] = Hash.new
+data[:letter][:sender_attributes] = Hash.new
+data[:letter][:recipient_attributes] = Hash.new
+
+data[:mailing_year]="2011"
+data[:mailing_month]="01"
+data[:mailing_day]="15"
+data[:letter][:pdf_remote_url]="http://www.irs.gov/pub/irs-pdf/fw4.pdf"
+data[:letter][:sender_attributes][:name]="Some Dude"
+data[:letter][:sender_attributes][:street1]="123 Any Street"
+data[:letter][:sender_attributes][:city]="Ashburn"
+data[:letter][:sender_attributes][:state]="VA"
+data[:letter][:sender_attributes][:zip]="20148"
+data[:letter][:recipient_attributes][:name]="That Guy"
+data[:letter][:recipient_attributes][:street1]="789 Some Dr"
+data[:letter][:recipient_attributes][:city]="San Antonio"
+data[:letter][:recipient_attributes][:state]="TX"
+data[:letter][:recipient_attributes][:zip]="99999"
+	
+base.create_letter(data)</code></pre>
+
+To show an existing letter with :id=ID
+<pre><code>base.show_letter(ID)</code></pre>
+
+To update an existing letter with :id=ID
+<pre><code>data = Hash.new
+data[:letter] = Hash.new
+data[:letter][:sender_attributes] = Hash.new
+
+data[:mailing_year]="2011"
+data[:mailing_month]="01"
+data[:mailing_day]="01"
+data[:letter][:sender_attributes][:country]="USA"
+	
+base.update_letter(ID, data)</code></pre>
+
+To purchase an existing letter with :id=ID
+<pre><code>base.purchase_letter(ID)</code></pre>
+
+h2. Note on Patches/Pull Requests
+
+# Fork the project.
+# Make your feature addition or bug fix.
+# Add tests for it. This is important so I don't break it in a future version unintentionally.
+# Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+# Send me a pull request. Bonus points for topic branches.
+
+h2. Copyright
+
+Copyright (c) 2010 Paul Singh, released under the MIT license

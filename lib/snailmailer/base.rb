@@ -14,16 +14,16 @@ module SnailMailer
       perform_get("/letters.json")
     end
     
-    def create_letter(letter)
-      perform_post("/letters.json", :body => {:letter => letter})
+    def create_letter(data)
+      perform_post("/letters.json", :body => {:mailing_month => data[:mailing_month], :mailing_day => data[:mailing_day], :mailing_year => data[:mailing_year], :letter => data[:letter]})
     end
     
     def show_letter(id)
       perform_get("/letters/#{id}.json")
     end
     
-    def update_letter(id, letter)
-      perform_put("/letters/#{id}.json", :body => {:letter => letter})
+    def update_letter(id, data)
+      perform_put("/letters/#{id}.json", :body => {:mailing_month => data[:mailing_month], :mailing_day => data[:mailing_day], :mailing_year => data[:mailing_year], :letter => data[:letter]})
     end
     
     def purchase_letter(id)

@@ -1,5 +1,3 @@
-require 'pp'
-
 module SnailMailer
   class Request
     extend Forwardable

@@ -1,7 +1,8 @@
 module SnailMailer
   class APIAuth
     include HTTParty
-    format :plain
+    format :json
+    headers 'Content-Type' => 'application/json' 
     
     attr_reader :api_key, :options
     
@@ -9,8 +10,14 @@ module SnailMailer
       APIAuth.default_params({:api_key => api_key})
       #@api_key = api_key
       @options = options
-      options[:api_endpoint] ||= "www.snailpad.com"
-      self.class.base_uri "https://#{options[:api_endpoint]}"
+      
+      if RAILS_ENV == "production"
+        options[:api_endpoint] ||= "www.snailpad.com"
+        self.class.base_uri "https://#{options[:api_endpoint]}"
+      else
+        options[:api_endpoint] ||= "localhost:3000"
+        self.class.base_uri "http://#{options[:api_endpoint]}"
+      end
     end
     
     def get(uri, headers={})
