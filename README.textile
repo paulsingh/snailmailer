@@ -1,21 +1,3 @@
-Snailmailer
-===========
-
-Introduction goes here.
-
-Example
-=======
-
->> apiauth = SnailMailer::APIAuth.new("1b9884c66a")
-=> #<SnailMailer::APIAuth:0x1030c8bf0 @options={:api_endpoint=>"localhost:3000"}>
-
->> base = SnailMailer::Base.new(apiauth)
-=> #<SnailMailer::Base:0x1030c3cb8 @client=#<SnailMailer::APIAuth:0x1030c8bf0 @options={:api_endpoint=>"localhost:3000"}>>
-
->> base.show_all_letters
-=> ALL THE GOOD STUFF!
-
-
 h1. SnailMailer
 
 SnailMailer is a Ruby on Rails plugin that provides a wrapper for interacting with the "SnailPad":http://www.snailpad.com/api snail mail service API.
