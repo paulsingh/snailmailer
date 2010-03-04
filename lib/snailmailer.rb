@@ -22,7 +22,7 @@ module SnailMailer
   class General           < SnailMailerError; end
 
   class Unavailable   < StandardError; end
-  class InformSnailPad < StandardError; end
+  class InformMailFinch < StandardError; end
   class NotFound      < StandardError; end
 
   #def self.user(id)

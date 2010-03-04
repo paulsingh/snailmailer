@@ -82,7 +82,7 @@ module SnailMailer
             data = parse(response)
             raise General.new(data), "(#{response.code}): #{response.message} - #{data['error'] if data}"
           when 500
-            raise InformSnailPad, "SnailPad had an internal error. Please let them know in the group. (#{response.code}): #{response.message}"
+            raise InformMailFinch, "MailFinch had an internal error. Please let them know in the group. (#{response.code}): #{response.message}"
           when 502..503
             raise Unavailable, "(#{response.code}): #{response.message}"
         end

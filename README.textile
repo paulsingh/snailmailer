@@ -1,6 +1,6 @@
 h1. SnailMailer
 
-SnailMailer is a Ruby on Rails plugin that provides a wrapper for interacting with the "SnailPad":http://www.snailpad.com/api snail mail service API.
+SnailMailer is a Ruby on Rails plugin that provides a wrapper for interacting with the "MailFinch":http://www.mailfinch.com/api snail mail service API.
 
 h2. Installation
 
@@ -8,18 +8,18 @@ h2. Installation
 
 h2. Requirements
 
-You will need a "SnailPad":http://www.snailpad.com account. Once you have your SnailPad account set up, you will need to "obtain your API key":http://www.snailpad.com/account/ in order to get started using SnailMailer.
+You will need a "MailFinch":http://www.mailfinch.com account. Once you have your MailFinch account set up, you will need to "obtain your API key":http://www.mailfinch.com/account/ in order to get started using SnailMailer.
 
 h2. Usage
 
-SnailMailer is intended to be a complete Ruby wrapper for working with the SnailPad API. All methods available from the SnailPad API are available. 
+SnailMailer is intended to be a complete Ruby wrapper for working with the MailFinch API. All methods available from the MailFinch API are available. 
 
-You will need to pass your SnailPad API key to get started:
+You will need to pass your MailFinch API key to get started:
 
 <pre><code>apiauth = SnailMailer::APIAuth.new("YOUR_API_KEY")</code></pre>
 <pre><code>base = SnailMailer::Base.new(apiauth)</code></pre>
 
-Once you have created a SnailMailer object, you can begin interacting with the SnailPad account that your API key is associated with.
+Once you have created a SnailMailer object, you can begin interacting with the MailFinch account that your API key is associated with.
 
 h3. Working with Letters
 

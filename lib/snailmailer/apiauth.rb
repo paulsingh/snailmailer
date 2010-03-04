@@ -12,7 +12,7 @@ module SnailMailer
       @options = options
       
       if RAILS_ENV == "production"
-        options[:api_endpoint] ||= "www.snailpad.com"
+        options[:api_endpoint] ||= "www.mailfinch.com"
         self.class.base_uri "https://#{options[:api_endpoint]}"
       else
         options[:api_endpoint] ||= "localhost:3000"
